@@ -9,7 +9,11 @@
     </head>
 
     <body>
+        {% if not user.is_authenticated %}
         <h1>Rango says... Hey Hey</h1>
+        {% else %}
+        <h1> Rango says... Hello {{ user.username }}!</h1>
+        {% endif %}
         {% if categories %}
             <ul>
                 {% for category in categories %}
@@ -31,8 +35,37 @@
         {%  else %}
             <strong> No Pages</strong>
         {%  endif %}
-        <a href = "/rango/about/">About</a> <br />
+        <hr/>
+        {%  if user.is_authenticated %}
+            <a href="/rango/restricted/">Restricted Page</a><br />
+            <a href="/rango/logout/">Logout</a><br />
+        {% else %}
+             <a href="/rango/login/">Login</a>
+             <a href = "/rango/register/">Register Here</a>
+        {% endif %}
+
+        <a href = "/rango/about/">About</a>
+        <br/>
         <img src = "{% static "rango.jpg" %}" alt ="Picture of rango" />
+
+        <hr/>
+
+    <form action="/rango/charge/" method="POST">
+      {% csrf_token %}
+      <script
+        src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
+        data-key="pk_test_J4tAwVZGLarBYOGBo5bVKV3b"
+        data-amount="3000"
+        data-name="Demo Site"
+        data-description="2 widgets ($20.00)"
+        data-image="/128x128.png">
+      </script>
+    </form>
+
     </body>
+
+
+
+
 
 </html>
