@@ -43,7 +43,7 @@ def index(request):
     return response
 
 def about(request):
-    return render_to_response('rango/about.html')
+    return render_to_response('rango/about.html', {}, RequestContext(request))
     #return HttpResponse("<a href='/rango/'>Index</a>")
 
 

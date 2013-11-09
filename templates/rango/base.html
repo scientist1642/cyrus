@@ -25,13 +25,19 @@
            <div class="nav-collapse collapse">
                 <ul class="nav pull-right">
                 {%  if user.is_authenticated %}
-                    <li><a href="/rango/restricted/">Restricted Page</a> </li>
-                    <li> <a href="/rango/logout/">Logout</a><br /> </li>
+                    <li class="navbar-text">Welcome, {{ user.username }}!</li>
+
+                    <li> <a href="/rango/logout/">Logout</a></li>
                 {% else %}
                     <li><a href="/rango/login/">Login</a> </li>
-                    <li> <a href = "/rango/register/">Register Here</a> </li>
+                    <li> <a href = "/rango/register/">Register</a> </li>
                 {% endif %}
-
+                </ul>
+                <ul class="nav">
+                    {% if user.is_authenticated %}
+                        <li><a href="/rango/restricted/">Restricted Page</a> </li>
+                        <li><a href = "/rango/add_category/">Add category</a></li>
+                    {% endif %}
                     <li><a href = "/rango/about/">About</a> </li>
                 </ul>
            </div>
